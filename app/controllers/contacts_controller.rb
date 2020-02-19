@@ -1,20 +1,10 @@
 class ContactsController < ApplicationController
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
-  # GET /contacts
-  # GET /contacts.json
-  def index
-    @contacts = Contact.all
-  end
-
-  # GET /contacts/1
-  # GET /contacts/1.json
-  def show
-  end
-
   # GET /contacts/new
   def new
-    @contact = Contact.new
+    @user = User.find(params[:user_id])
+    @contact = @user.send(set_type.pluralize).new
   end
 
   # GET /contacts/1/edit
@@ -24,7 +14,8 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
-    @contact = Contact.new(contact_params)
+    @user = User.find(params[:user_id])
+    @contact = @user.send(set_type.pluralize).new(contact_params)
 
     respond_to do |format|
       if @contact.save
@@ -64,11 +55,21 @@ class ContactsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contact
-      @contact = Contact.find(params[:id])
+      @user = User.find(params[:user_id])
+      @contact = @user.send(set_type.pluralize).find(params[:id])
+    end
+
+    def set_type
+      case params[:type]
+      when 'Friend'
+        'friend'
+      when 'Emergency'
+        'emergency'
+      end
     end
 
     # Only allow a list of trusted parameters through.
     def contact_params
-      params.require(:contact).permit(:user_id, :type, :first_name, :last_name, :phone_number, :address, :city, :state, :birthday)
+      params.require(set_type.to_sym).permit(:user_id, :type, :first_name, :last_name, :phone_number, :address, :city, :state, :birthday)
     end
 end
