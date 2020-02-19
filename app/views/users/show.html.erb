@@ -18,51 +18,59 @@
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
 
+<div style="margin:50px 0;"></div>
+
 <h1>Emergency Contacts</h1>
-<%= link_to 'New', new_user_emergency_path(@user) %>
+<%= link_to '+ New', new_user_emergency_path(@user) %>
 <table>
   <thead>
     <tr>
-      <th></th>
       <th>First Name</th>
       <th>Last Name</th>
       <th>Phone Number</th>
       <th>Birthday</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
     <% @user.emergencies.each do |contact| %>
       <tr>
-        <td><% link_to 'Delete', [@user, contact], method: :delete %></td>
-        <td><% contact.first_name %></td>
-        <td><% contact.last_name %></td>
-        <td><% contact.phone_number %></td>
-        <td><% contact.birthday %></td>
+        <td><%= contact.first_name %></td>
+        <td><%= contact.last_name %></td>
+        <td><%= contact.phone_number %></td>
+        <td><%= contact.birthday %></td>
+        <td>
+          <%= link_to 'Edit', edit_user_emergency_path(@user, contact) %> |
+          <%= link_to 'Delete', [@user, contact], method: :delete %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <h1>Friends Contacts</h1>
-<%= link_to 'New', new_user_friend_path(@user) %>
+<%= link_to '+ New', new_user_friend_path(@user) %>
 <table>
   <thead>
     <tr>
-      <th></th>
       <th>First Name</th>
       <th>Last Name</th>
       <th>Phone Number</th>
       <th>Birthday</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
-    <% @user.emergencies.each do |contact| %>
+    <% @user.friends.each do |contact| %>
       <tr>
-        <td><% link_to 'Delete', [@user, contact], method: :delete %></td>
-        <td><% contact.first_name %></td>
-        <td><% contact.last_name %></td>
-        <td><% contact.phone_number %></td>
-        <td><% contact.birthday %></td>
+        <td><%= contact.first_name %></td>
+        <td><%= contact.last_name %></td>
+        <td><%= contact.phone_number %></td>
+        <td><%= contact.birthday %></td>
+        <td>
+          <%= link_to 'Edit', edit_user_friend_path(@user, contact) %> |
+          <%= link_to 'Delete', [@user, contact], method: :delete %>
+        </td>
       </tr>
     <% end %>
   </tbody>
