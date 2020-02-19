@@ -1,12 +1,19 @@
 # Single Table Inheritance (Coba)
 
-# Prerequisite
+## What is Single Table Inheritance?
+Single Table Inheritance (STI) is defined as multiple subclasses sharing a single database table. Rails supports STI right out of the box simply by inheriting subclasses from an ActiveRecord parent class which has a type column in its table.
+
+(source: https://medium.com/@User3141592/when-to-use-single-table-inheritance-vs-multiple-table-inheritance-db7e9733ae2e)
+
+Tutorial from: https://www.driftingruby.com/episodes/single-table-inheritance
+
+## Prerequisite
 
 1. Ruby 2.6.3
 2. Rails 5.2.4
 3. PostgreSQL 11.5
 
-# Migration
+## Migration
 
 Edit the migration like below
 
@@ -31,7 +38,7 @@ class CreateContacts < ActiveRecord::Migration[5.2]
 end
 ```
 
-# Models
+## Models
 
 **user.rb**
 ```ruby
