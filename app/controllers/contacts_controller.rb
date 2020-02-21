@@ -35,7 +35,7 @@ class ContactsController < ApplicationController
   # DELETE /contacts/1
   def destroy
     @contact.destroy
-      redirect_to user_url(@user), notice: 'Contact was successfully destroyed.'
+      redirect_to @user, notice: 'Contact was successfully destroyed.'
   end
 
   private
